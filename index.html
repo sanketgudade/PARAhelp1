@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Image - PARAHELP</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e0f7fa;
+            color: #080000;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('back1.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        .rotating-image {
+            width: 150px; /* Adjust size as needed */
+            animation: rotate 2s linear infinite;
+            background-color: white; /* Set background to white */
+            padding: 10px; /* Optional padding for spacing */
+            border-radius: 10px; /* Optional rounded corners */
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .parahelp-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+       
+        setTimeout(function() {
+            window.location.href = 'intro.html';
+        }, 5000);
+    </script>
+</head>
+<body>
+
+    
+    <img src="p.jpeg" alt="Rotating P" class="rotating-image">
+    
+    
+    <div class="parahelp-text">PARAHELP</div>
+
+</body>
+</html>

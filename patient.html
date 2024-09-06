@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Instructions</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #000000;
+            text-align: center;
+            background: url('HOSP.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        h1 {
+            margin-top: 30px;
+            color: hsl(229, 97%, 50%);
+            font-family: 'Tahoma', sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .section {
+            margin: 10px 0;
+        }
+        h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 10px; /* Reduce the top margin */
+}
+
+#dateTime {
+    margin: 5px 0; /* Reduce the top and bottom margin */
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 20px auto;
+            display: block;
+            width: 250px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .instructions {
+            text-align: left;
+            margin: 0 2cm;
+            max-width: calc(100% - 4cm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .instructions ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        .instructions li {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        select {
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        #dateTime {
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="greeting"></h1>
+    <div id="dateTime" class="section"></div>
+    <div class="instructions">
+        <h2 id="instructionsTitle"></h2>
+        <div class="section">
+            <p id="introText"></p>
+            <ul id="instructionsList"></ul>
+        </div>
+
+        <div class="section">
+            <a href="main.html" id="startButton" class="button"></a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    function loadLanguageContent(language) {
+        const content = {
+            en: {
+                greeting: `Hello ${getQueryParameter('name')}, we are here to help you.`,
+                instructionsTitle: "Instructions for You",
+                introText: "You can communicate your needs by pressing a button. Here’s how:",
+                instructions: [
+                    "Press a Button: Each button has an image and label that represent different needs or requests, like 'Food,' 'Toilet,' or 'Help.'",
+                    "What Happens: When you press a button, a message will appear on the screen, and a sound will play to alert your caretaker.",
+                    "Response Time: Your caretaker will be notified immediately and will come to assist you.",
+                    "Additional Buttons: There are also buttons for accessing entertainment and information websites.",
+                    "Input Methods: You can interact with the system using the following methods:",
+                    "1. Hand Sensor: A sensor will be placed on your finger. When the green outline appears around the button on the screen, move your finger to press it.",
+                    "2. Eye Movement or Blinks: You can also use eye movement or blinks to select buttons on the screen.",
+                    "3. Brain Interface: Advanced brain interface technology allows you to select options using brain signals."
+                ],
+                startButton: "____Let's Start____"
+            },
+            hi: {
+                greeting: `नमस्ते ${getQueryParameter('name')}! हम आपकी मदद के लिए यहाँ हैं।`,
+                instructionsTitle: "आपके लिए निर्देश",
+                introText: "आप एक बटन दबाकर अपनी जरूरतों को संप्रेषित कर सकते हैं। यहाँ बताया गया है कि कैसे:",
+                instructions: [
+                    "बटन दबाएँ: प्रत्येक बटन एक विशिष्ट आवश्यकता या अनुरोध को दर्शाता है, जैसे 'खाना,' 'टॉयलेट,' या 'मदद।'",
+                    "क्या होगा: जब आप बटन दबाएंगे, एक संदेश स्क्रीन पर दिखाई देगा और आपके देखभालकर्ता को सूचित करने के लिए एक ध्वनि चलेगी।",
+                    "प्रतिक्रिया का समय: आपके देखभालकर्ता को तुरंत सूचित किया जाएगा और वे आपकी सहायता के लिए आएंगे।",
+                    "अधिक बटन: मनोरंजन और जानकारी वाली वेबसाइटों तक पहुँचने के लिए भी बटन हैं।",
+                    "इनपुट विधियाँ: आप निम्नलिखित विधियों का उपयोग करके सिस्टम के साथ इंटरैक्ट कर सकते हैं:",
+                    "1. हाथ सेंसर: एक सेंसर आपके अंगूठे पर लगाया जाएगा। जब स्क्रीन पर बटन के चारों ओर हरी रेखा दिखाई दे, तो बटन दबाने के लिए अपने अंगूठे को हिलाएँ।",
+                    "2. आँख की गति या झपकना: आप स्क्रीन पर बटन चुनने के लिए आँख की गति या झपकने का भी उपयोग कर सकते हैं।",
+                    "3. मस्तिष्क इंटरफेस: उन्नत मस्तिष्क इंटरफेस तकनीक आपको मस्तिष्क सिग्नल का उपयोग करके विकल्प चुनने की अनुमति देती है।"
+                ],
+                startButton: "____चलें शुरू करें____"
+            },
+            mr: {
+                greeting: `${getQueryParameter('name')} नमस्कार! आम्ही तुमची मदत करण्यासाठी येथे आहोत.`,
+                instructionsTitle: "तुमच्यासाठी निर्देश",
+                introText: "तुम्ही एक बटन दाबून तुमच्या गरजा संवाद साधू शकता. येथे कसे करावे ते आहे:",
+                instructions: [
+                    "बटन दाबा: प्रत्येक बटन विशिष्ट गरज किंवा विनंती दर्शवते, जसे 'अन्न,' 'टॉयलेट,' किंवा 'मदत.'",
+                    "काय होईल: जेव्हा तुम्ही बटन दाबाल, एक संदेश स्क्रीनवर दिसेल आणि तुमच्या देखरेख करणाऱ्याला सूचित करण्यासाठी एक ध्वनी खेळेल.",
+                    "प्रतिक्रिया वेळ: तुमच्या देखरेख करणाऱ्याला लगेच सूचित केले जाईल आणि ते तुमच्याकडे मदतीसाठी येतील.",
+                    "अधिक बटणे: मनोरंजन आणि माहितीच्या वेबसाइट्सपर्यंत पोहोचण्यासाठीही बटणे आहेत.",
+                    "इनपुट पद्धती: तुम्ही खालील पद्धती वापरून सिस्टमसह संवाद साधू शकता:",
+                    "1. हात सेंसर: एक सेंसर तुमच्या अंगठ्यावर ठेवला जाईल. स्क्रीनवर बटनाभोवती हिरवी रेखा दिसल्यावर, बटन दाबण्यासाठी तुमचा अंगठा हलवा.",
+                    "2. डोळ्यांची हालचाल किंवा डोळ्यांची उघडझापन  करू तुम्ही स्क्रीनवरील बटणे निवडण्यासाठी डोळ्यांची हालचाल किंवा प blinking वापरू शकता.",
+                    "3. ब्रेन इंटरफेस: प्रगत ब्रेन इंटरफेस तंत्रज्ञान तुम्हाला ब्रेन सिग्नल वापरून पर्याय निवडण्याची परवानगी देते."
+                ],
+                startButton: "____सुरू करूया____"
+            }
+        };
+
+        document.getElementById('greeting').textContent = content[language].greeting;
+        document.getElementById('instructionsTitle').textContent = content[language].instructionsTitle;
+        document.getElementById('introText').textContent = content[language].introText;
+        const ul = document.getElementById('instructionsList');
+        ul.innerHTML = content[language].instructions.map(instruction => `<li>${instruction}</li>`).join('');
+        document.getElementById('startButton').textContent = content[language].startButton;
+    }
+
+    function updateDateTime() {
+        const now = new Date();
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        document.getElementById('dateTime').textContent = `Current Date and Time: ${now.toLocaleString(undefined, options)}`;
+    }
+
+    window.onload = function() {
+        const language = getQueryParameter('lang') || 'en';
+        loadLanguageContent(language);
+        updateDateTime();
+        setInterval(updateDateTime, 1000); // Update every second
+    };
+</script>
+
+</body>
+</html>

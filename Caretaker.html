@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions for Caretaker</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #080000;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('back1.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden; 
+        }
+        h1 {
+            margin-top: 30px; /* Reduced gap */
+            color: hsl(229, 97%, 50%);
+            font-family: 'Tahoma', sans-serif;
+            font-size: 40px; 
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .section {
+            margin: 10px 0; 
+        }
+        h2 {
+            font-size: 32px; 
+            font-weight: bold; 
+            text-decoration: underline; 
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: 2px solid #0056b3;
+            padding: 15px 30px; 
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 20px; 
+            margin: 20px auto;
+            display: block;
+            width: 250px; 
+            font-weight: bold; 
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .instructions {
+            text-align: left;
+            margin: 0 2cm; 
+            max-width: calc(100% - 4cm); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .instructions ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        .instructions li {
+            margin-bottom: 15px;
+            font-size: 20px; 
+        }
+        select, input {
+            padding: 15px;
+            margin: 15px 0; 
+            font-size: 18px; 
+        }
+        #dateTime {
+            margin: 20px 0;
+            font-size: 20px; 
+            font-weight: bold; 
+            text-decoration: underline; 
+        }
+        #settings {
+            position: fixed;
+            bottom: 20px; 
+            left: 20px; 
+            font-size: 24px;
+            cursor: pointer;
+        }
+        #settingsPanel {
+            display: none;
+            position: fixed;
+            bottom: 60px; 
+            left: 20px; /* Positioned to the left */
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        #settingsPanel label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #settingsPanel input, #settingsPanel select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        #settingsPanel button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px; 
+            font-weight: bold; /* Bold text */
+        }
+        #settingsPanel button:hover {
+            background-color: #0056b3;
+        }
+        .language-content {
+            display: none; 
+        }
+        .language-content.active {
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome Caretaker</h1>
+
+<div class="container">
+    <div class="instructions">
+        <h2 id="instructionsTitle">Instructions for Caretakers</h2>
+        <div id="instructionsText" class="section language-content active"></div>
+        
+        <div class="section">
+            <button class="button" onclick="startInterface()">Start</button>
+        </div>
+        <div id="developedBy" class="section">
+            <a href="Dev.html" class="developed-by-link">Developed by @ GP Nagpur computer Engg Dept</a>
+        </div>
+        <div id="dateTime" class="section"></div>
+        <div id="dateTime" class="section"></div>
+           
+    </div>
+</div>
+
+<div id="settings">
+    ⚙️ Settings
+</div>
+
+<div id="settingsPanel">
+    <h3>Settings</h3>
+    <label for="patientName">Enter Patient's Name:</label>
+    <input type="text" id="settingsPatientName" placeholder="Patient's Name">
+    <label for="language">Select Language:</label>
+    <select id="settingsLanguage" onchange="updateLanguage()">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="mr">Marathi</option>
+    </select>
+    <button onclick="applySettings()">Apply</button>
+</div>
+
+<script>
+    const content = {
+        en: {
+            title: 'Instructions for Caretakers',
+            text: `The Assistive Interface is designed to help individuals with limited mobility or communication difficulties express their needs and desires more easily. Below are some key points to understand and use this interface effectively:
+            <ul>
+                <li><strong><u><b>Buttons:</b></u></strong> Each button represents a specific need or request. The icon on each button provides a visual cue for its function.</li>
+                <li><strong><u><b>Interaction:</b></u></strong> When a button is clicked, the corresponding message will be displayed on the screen, and an alert will be sent to the specified phone number.</li>
+                <li><strong><u><b>Sound Alert:</b></u></strong> A beep sound will play to grab attention when a button is pressed, ensuring that the request is noticed promptly.</li>
+                <li><strong><u><b>Message Display:</b></u></strong> The message will appear in a scrolling marquee on the screen to ensure clarity and visibility.</li>
+                <li><strong><u><b>Visual Indicators:</b></u></strong> The outline of the buttons rotates periodically to draw attention to different options.</li>
+            </ul>`
+        },
+        hi: {
+            title: 'देखभालकर्ताओं के लिए निर्देश',
+            text: `सहायक इंटरफेस को सीमित गतिशीलता या संचार कठिनाइयों वाले व्यक्तियों को अपनी जरूरतों और इच्छाओं को अधिक आसानी से व्यक्त करने में मदद करने के लिए डिज़ाइन किया गया है। इस इंटरफेस का प्रभावी ढंग से उपयोग करने और समझने के लिए नीचे कुछ प्रमुख बिंदु दिए गए हैं:
+            <ul>
+                <li><strong>बटन:</strong> प्रत्येक बटन एक विशिष्ट आवश्यकता या अनुरोध का प्रतिनिधित्व करता है। प्रत्येक बटन पर आइकन इसके कार्य के लिए एक दृश्य संकेत प्रदान करता है।</li>
+                <li><strong>इंटरैक्शन:</strong> जब एक बटन पर क्लिक किया जाता है, तो संबंधित संदेश स्क्रीन पर प्रदर्शित होगा, और निर्दिष्ट फोन नंबर पर एक अलर्ट भेजा जाएगा।</li>
+                <li><strong>साउंड अलर्ट:</strong> बटन दबाए जाने पर ध्यान आकर्षित करने के लिए एक बीप ध्वनि चलेगी, यह सुनिश्चित करते हुए कि अनुरोध को तुरंत नोटिस किया जाए।</li>
+                <li><strong>संदेश प्रदर्शन:</strong> संदेश स्क्रीन पर स्क्रॉलिंग marquee में दिखाई देगा ताकि स्पष्टता और दृश्यता सुनिश्चित हो सके।</li>
+                <li><strong>दृश्य संकेतक:</strong> बटनों की सीमा समय-समय पर घुमती है ताकि विभिन्न विकल्पों पर ध्यान आकर्षित हो सके।</li>
+            </ul>`
+        },
+        mr: {
+            title: 'देखरेख करणाऱ्यांसाठी सूचना',
+            text: `सहायक इंटरफेस हे कमी गतिशीलता किंवा संवादाच्या अडचणी असलेल्या व्यक्तींना त्यांच्या गरजा आणि इच्छांचे अधिक सहजपणे व्यक्त करण्यासाठी डिझाइन केले आहे. या इंटरफेसचा प्रभावीपणे वापर कसा करावा आणि समजून घ्या यासाठी खाली काही मुख्य मुद्दे दिले आहेत:
+            <ul>
+                <li><strong>बटणे:</strong> प्रत्येक बटन विशिष्ट गरज किंवा विनंतीचे प्रतिनिधित्व करते. प्रत्येक बटणावरील आयकन त्याच्या कार्यासाठी दृश्य संकेत प्रदान करते.</li>
+                <li><strong>अंतरक्रिया:</strong> जेव्हा बटणावर क्लिक केले जाते, तेव्हा संबंधित संदेश स्क्रीनवर प्रदर्शित होईल आणि निर्दिष्ट फोन नंबरवर एक अलर्ट पाठवला जाईल.</li>
+                <li><strong>साउंड अलर्ट:</strong> बटण दाबल्यावर लक्ष वेधून घेण्यासाठी एक बीप ध्वनी वाजेल, यामुळे अनुरोध त्वरित लक्षात येईल.</li>
+                <li><strong>संदेश प्रदर्शित करणे:</strong> संदेश स्क्रीनवर स्क्रोलिंग marquee मध्ये प्रदर्शित होईल, यामुळे स्पष्टता आणि दृश्यता सुनिश्चित होईल.</li>
+                <li><strong>दृश्य निर्देशक:</strong> बटणांच्या बाहेरच्या रेषा वेळीच फिरतात ज्यामुळे विविध पर्यायांवर लक्ष वेधले जाते.</li>
+            </ul>`
+        }
+    };
+
+    function updateLanguage() {
+        const language = document.getElementById('settingsLanguage').value;
+        const selectedContent = content[language];
+
+        document.getElementById('instructionsTitle').innerHTML = selectedContent.title;
+        document.getElementById('instructionsText').innerHTML = selectedContent.text;
+
+        
+        const allContents = document.querySelectorAll('.language-content');
+        allContents.forEach(content => content.classList.remove('active'));
+
+        document.getElementById('instructionsText').classList.add('active');
+    }
+
+    function startInterface() {
+        const patientName = document.getElementById('settingsPatientName').value;
+        const language = document.getElementById('settingsLanguage').value;
+        if (patientName) {
+            const patientPage = `patient.html?name=${encodeURIComponent(patientName)}&lang=${language}`;
+            window.location.href = patientPage;
+        } else {
+            alert("Please enter the patient's name in settings icon.");
+        }
+    }
+
+    function updateDateTime() {
+        const now = new Date();
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        document.getElementById('dateTime').textContent = `Current Date and Time: ${now.toLocaleString(undefined, options)}`;
+    }
+
+    function toggleSettings() {
+        const settingsPanel = document.getElementById('settingsPanel');
+        settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function applySettings() {
+        updateLanguage();
+        toggleSettings();
+    }
+
+    window.onload = function() {
+    
+        updateLanguage();
+        updateDateTime();
+        setInterval(updateDateTime, 1000); // Update every second
+        document.getElementById('settings').addEventListener('click', toggleSettings);
+    };
+</script>
+
+</body>
+</html>

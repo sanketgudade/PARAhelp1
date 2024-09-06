@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistive Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('back1.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            padding: 0 10px;
+            max-width: 1000px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .button {
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            border: 3px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .button.outline {
+            border: 6px solid rgb(83, 222, 83);
+        }
+        .button-label {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+            background-color: #c6e020e8;
+            padding: 4px 6px;
+            border-radius: 4px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        #message-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #message {
+            font-size: 24px;
+            color: #180101;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            width: 100%;
+            max-width: 90%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        #message marquee {
+            font-size: 24px;
+            color: #0e0101;
+            font-weight: bold;
+            font-family: "optima";
+        }
+
+        /* Grid layout for large screens */
+        @media (min-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        /* Grid layout for tablets and smaller desktops */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Grid layout for mobile devices */
+        @media (max-width: 767px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .button {
+                width: 100px;
+                height: 100px;
+            }
+            .button-label {
+                font-size: 10px;
+                padding: 2px 4px;
+            }
+            #message {
+                font-size: 20px;
+                padding: 10px 20px;
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>We Are Here to Help You</h1>
+
+<div>
+    <div class="container" id="buttonContainer">
+        <button class="button" data-message="I want food" style="background-image: url('food.png');">
+            <span class="button-label">Food</span
+            </button>
+            <button class="button" data-message="I need to go to the toilet" style="background-image: url('toilet.png');">
+                <span class="button-label">Toilet</span>
+            </button>
+            <button class="button" data-message="I need clothes" style="background-image: url('clothes.png');">
+                <span class="button-label">Clothes</span>
+            </button>
+            <button class="button" data-message="I want to go outside" style="background-image: url('outside.png');">
+                <span class="button-label">Outside</span>
+            </button>
+            <button class="button" data-message="I want tea" style="background-image: url('tea.png');">
+                <span class="button-label">Tea</span>
+            </button>
+            <button class="button" data-message="I want milk" style="background-image: url('milk.png');">
+                <span class="button-label">Milk</span>
+            </button>
+            <button class="button" data-message="I want water" style="background-image: url('water.png');">
+                <span class="button-label">Water</span>
+            </button>
+            <button class="button" data-message="I need help" style="background-image: url('help.png');">
+                <span class="button-label">Help</span>
+            </button>
+            <button class="button" data-message="I want to rest" style="background-image: url('rest.png');">
+                <span class="button-label">Rest</span>
+            </button>
+            <button class="button" data-message="I am uncomfortable" style="background-image: url('uncomfortable.png');">
+                <span class="button-label">Uncomfortable</span>
+            </button>
+            <button class="button" data-message="I am happy" style="background-image: url('happy.png');">
+                <span class="button-label">Happy</span>
+            </button>
+            <button class="button" data-message="I am sad" style="background-image: url('sad.png');">
+                <span class="button-label">Sad</span>
+            </button>
+            <button class="button" data-message="I am cold" style="background-image: url('cold.png');">
+                <span class="button-label">Cold</span>
+            </button>
+            <button class="button" data-message="I am hot" style="background-image: url('hot.png');">
+                <span class="button-label">Hot</span>
+            </button>
+            <button class="button" data-message="I need medication" style="background-image: url('medication.png');">
+                <span class="button-label">Medication</span>
+            </button>
+            <button class="button" data-message="I need to talk" style="background-image: url('talk.png');">
+                <span class="button-label">Talk</span>
+            </button>
+            <button class="button" data-message="Open Instagram" style="background-image: url('instagram.png');" onclick="window.open('https://www.instagram.com', '_blank')">
+                <span class="button-label">Instagram</span>
+            </button>
+            <button class="button" data-message="Open YouTube" style="background-image: url('youtube.png');" onclick="window.open('https://www.youtube.com', '_blank')">
+                <span class="button-label">YouTube</span>
+            </button>
+            <button class="button" data-message="Open Netflix" style="background-image: url('netflix.png');" onclick="window.open('https://www.netflix.com', '_blank')">
+                <span class="button-label">Netflix</span>
+            </button>
+            <button class="button" data-message="Open Spotify" style="background-image: url('spotify.png');" onclick="window.open('https://www.spotify.com', '_blank')">
+                <span class="button-label">Spotify</span>
+            </button>
+            <button class="button" data-message="Open Snapchat" style="background-image: url('snapchat.png');" onclick="window.open('https://www.snapchat.com', '_blank')">
+                <span class="button-label">Snapchat</span>
+            </button>
+            <button class="button" data-message="Open News" style="background-image: url('news.png');" onclick="window.open('https://www.bbc.com/news', '_blank')">
+                <span class="button-label">News</span>
+            </button>
+            <button class="button" data-message="Open Drama" style="background-image: url('drama.png');" onclick="window.open('https://www.drama.com', '_blank')">
+                <span class="button-label">Drama</span>
+            </button>
+            <button class="button" data-message="Play Bhajan" style="background-image: url('bhajan.png');" onclick="window.open('https://www.bhajan.com', '_blank')">
+                <span class="button-label">Bhajan</span>
+            </button>
+        </div>
+    
+        <div id="message-container">
+            <div id="message"><marquee></marquee></div>
+        </div>
+    </div>
+    
+    <script>
+        let currentIndex = 0;
+        const buttons = document.querySelectorAll('.button');
+        const interval = 5000;
+        let intervalId;
+    
+        function updateOutline() {
+            buttons.forEach((button, index) => {
+                button.classList.toggle('outline', index === currentIndex);
+            });
+        }
+    
+        function startOutlineRotation() {
+            intervalId = setInterval(() => {
+                updateOutline();
+                currentIndex = (currentIndex + 1) % buttons.length;
+            }, interval);
+        }
+    
+        function stopOutlineRotation() {
+            clearInterval(intervalId);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            startOutlineRotation();
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const message = event.currentTarget.getAttribute('data-message');
+                    const messageElement = document.querySelector('#message marquee');
+                    messageElement.textContent = message;
+                    stopOutlineRotation();
+                    setTimeout(startOutlineRotation, 5000);
+                });
+            });
+        });
+    </script>
+    
+    </body>
+    </html>
+    
